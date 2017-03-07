@@ -1,6 +1,5 @@
 # Summary
 
-* [Overview](introduction.md)
 * [Lesson Plan](lesson-plan.md)
   * [Setup](setup.md)
   * [Session 1](session-1.md)
