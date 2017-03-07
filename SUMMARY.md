@@ -13,14 +13,15 @@
     * [Fields](fields.md)
     * [Turning Logic](turning-logic.md)
   * [Session 3](session-3.md)
-    * Comparison
-    * Fields
-    * Messages
-    * State
-    * Methods
+    * [Setup](destroy-setup.md)
+    * [Collision Detection](collision.md)
+    * [Tags](tags.md)
   * [Session 4](session-4.md)
-    * Physics
-    * Tags
+    * Setup
+    * Prefabs
+    * Instantiating
+    * Offsets
+    * Timers
 
 ## Context
 * [History](history.md)

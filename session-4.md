@@ -7,21 +7,60 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroySelfOnCollision : MonoBehaviour
-{
-	public string with;
+public class CloneOnTimer : MonoBehaviour {
+	public GameObject clone;
 
-	void OnCollisionEnter2D(Collision2D collision)
+	void Update () {
+		Instantiate(clone, transform.position, transform.rotation);
+	}
+}
+```
+
+```cs
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CloneOnTimer : MonoBehaviour {
+	public GameObject clone;
+	public Vector2 offset;
+
+	void Update () {
+		Instantiate(clone, transform.position + transform.TransformDirection(new Vector3(offset.x, offset.y, 0)), transform.rotation);
+	}
+}
+```
+
+```cs
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CloneOnTimer : MonoBehaviour {
+	public float timeBetweenClones = 5;
+	public float counter;
+	public GameObject clone;
+	public Vector2 offset;
+
+	void Start()
 	{
-		if (collision.gameObject.tag == with)
+		counter = timeBetweenClones;
+	}
+
+	void Update () {
+		counter = counter - Time.deltaTime;
+		if (clone && counter <= 0)
 		{
-			Destroy(gameObject);
+			counter = timeBetweenClones;
+			Instantiate(clone, transform.position + transform.TransformDirection(new Vector3(offset.x, offset.y, 0)), transform.rotation);
 		}
 	}
 }
 ```
 
-
-<!-- * [`OnCollisionEnter2D`](https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnCollisionEnter2D.html)
-* [`Destroy`](https://docs.unity3d.com/ScriptReference/Object.Destroy.html)
-* [Tags](https://docs.unity3d.com/Manual/Tags.html) -->
+<!-- * similarities
+* variables
+* start
+* &&
+* calling methods
+* [`Instantiate`](https://docs.unity3d.com/ScriptReference/Object.Instantiate.html) -->
