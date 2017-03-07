@@ -60,6 +60,8 @@
 
     
     
+    <link rel="prev" href="tags.html" />
+    
 
     </head>
     <body>
@@ -283,66 +285,40 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.4.1" >
+        <li class="chapter " data-level="1.2.4.1" data-path="destroy-setup.html">
             
-                <span>
+                <a href="destroy-setup.html">
             
                     
-                    Comparison
+                    Setup
             
-                </span>
+                </a>
             
 
             
         </li>
     
-        <li class="chapter " data-level="1.2.4.2" >
+        <li class="chapter " data-level="1.2.4.2" data-path="collision.html">
             
-                <span>
+                <a href="collision.html">
             
                     
-                    Fields
+                    Collision Detection
             
-                </span>
+                </a>
             
 
             
         </li>
     
-        <li class="chapter " data-level="1.2.4.3" >
+        <li class="chapter " data-level="1.2.4.3" data-path="tags.html">
             
-                <span>
-            
-                    
-                    Messages
-            
-                </span>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.4.4" >
-            
-                <span>
+                <a href="tags.html">
             
                     
-                    State
+                    Tags
             
-                </span>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.4.5" >
-            
-                <span>
-            
-                    
-                    Methods
-            
-                </span>
+                </a>
             
 
             
@@ -372,7 +348,7 @@
                 <span>
             
                     
-                    Physics
+                    Setup
             
                 </span>
             
@@ -385,7 +361,46 @@
                 <span>
             
                     
-                    Tags
+                    Prefabs
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.3" >
+            
+                <span>
+            
+                    
+                    Instantiating
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.4" >
+            
+                <span>
+            
+                    
+                    Offsets
+            
+                </span>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2.5.5" >
+            
+                <span>
+            
+                    
+                    Timers
             
                 </span>
             
@@ -507,22 +522,58 @@
 <span class="hljs-keyword">using</span> System.Collections.Generic;
 <span class="hljs-keyword">using</span> UnityEngine;
 
-<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">DestroySelfOnCollision</span> : <span class="hljs-title">MonoBehaviour</span>
-{
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> with;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CloneOnTimer</span> : <span class="hljs-title">MonoBehaviour</span> {
+    <span class="hljs-keyword">public</span> GameObject clone;
 
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">OnCollisionEnter2D</span>(<span class="hljs-params">Collision2D collision</span>)
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Update</span> (<span class="hljs-params"></span>) </span>{
+        Instantiate(clone, transform.position, transform.rotation);
+    }
+}
+</code></pre>
+<pre><code class="lang-cs"><span class="hljs-keyword">using</span> System.Collections;
+<span class="hljs-keyword">using</span> System.Collections.Generic;
+<span class="hljs-keyword">using</span> UnityEngine;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CloneOnTimer</span> : <span class="hljs-title">MonoBehaviour</span> {
+    <span class="hljs-keyword">public</span> GameObject clone;
+    <span class="hljs-keyword">public</span> Vector2 offset;
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Update</span> (<span class="hljs-params"></span>) </span>{
+        Instantiate(clone, transform.position + transform.TransformDirection(<span class="hljs-keyword">new</span> Vector3(offset.x, offset.y, <span class="hljs-number">0</span>)), transform.rotation);
+    }
+}
+</code></pre>
+<pre><code class="lang-cs"><span class="hljs-keyword">using</span> System.Collections;
+<span class="hljs-keyword">using</span> System.Collections.Generic;
+<span class="hljs-keyword">using</span> UnityEngine;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CloneOnTimer</span> : <span class="hljs-title">MonoBehaviour</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span> timeBetweenClones = <span class="hljs-number">5</span>;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span> counter;
+    <span class="hljs-keyword">public</span> GameObject clone;
+    <span class="hljs-keyword">public</span> Vector2 offset;
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)
     </span>{
-        <span class="hljs-keyword">if</span> (collision.gameObject.tag == with)
+        counter = timeBetweenClones;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Update</span> (<span class="hljs-params"></span>) </span>{
+        counter = counter - Time.deltaTime;
+        <span class="hljs-keyword">if</span> (clone &amp;&amp; counter &lt;= <span class="hljs-number">0</span>)
         {
-            Destroy(gameObject);
+            counter = timeBetweenClones;
+            Instantiate(clone, transform.position + transform.TransformDirection(<span class="hljs-keyword">new</span> Vector3(offset.x, offset.y, <span class="hljs-number">0</span>)), transform.rotation);
         }
     }
 }
 </code></pre>
-<!-- * [`OnCollisionEnter2D`](https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnCollisionEnter2D.html)
-* [`Destroy`](https://docs.unity3d.com/ScriptReference/Object.Destroy.html)
-* [Tags](https://docs.unity3d.com/Manual/Tags.html) -->
+<!-- * similarities
+* variables
+* start
+* &&
+* calling methods
+* [`Instantiate`](https://docs.unity3d.com/ScriptReference/Object.Instantiate.html) -->
 
                                 
                                 </section>
@@ -550,6 +601,10 @@
 
             
                 
+                <a href="tags.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Tags">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
                 
             
         
@@ -558,7 +613,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Session 4","level":"1.2.5","depth":2,"next":{"title":"Physics","level":"1.2.5.1","depth":3,"ref":"","articles":[]},"previous":{"title":"Methods","level":"1.2.4.5","depth":3,"ref":"","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"session-4.md","mtime":"2017-03-07T04:43:01.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-06T22:49:31.373Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Session 4","level":"1.2.5","depth":2,"next":{"title":"Setup","level":"1.2.5.1","depth":3,"ref":"","articles":[]},"previous":{"title":"Tags","level":"1.2.4.3","depth":3,"path":"tags.md","ref":"tags.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"session-4.md","mtime":"2017-03-07T21:01:29.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-06T22:49:31.373Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
