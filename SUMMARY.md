@@ -1,5 +1,14 @@
 # Summary
 
+* [Introduction](README.md)
+
+## Instruction Notes
+  * [Type-along Coding](type-along.md)
+  * [Errors](errors.md)
+
+<!-- ## Context
+  * [History](history.md) -->
+
 * [Lesson Plan](lesson-plan.md)
   * [Setup](setup.md)
   * [Session 1](session-1.md)
@@ -7,8 +16,8 @@
     * [Unity's UI](ui.md)
     * [Play and Hack](play-and-hack.md)
   * [Session 2](session-2.md)
-    * [Setup](enemy-setup.md)
     * [C# vs Unity](csharp-vs-unity.md)
+    * [Setup](enemy-setup.md)
     * [Boilerplate](boilerplate.md)
     * [Fields](fields.md)
     * [Turning Logic](turning-logic.md)
@@ -21,10 +30,3 @@
     * [Instantiating](instantiating.md)
     * [Timers](timers.md)
     * [Prefabs](prefabs.md)
-
-## Context
-* [History](history.md)
-
-## Instruction Notes
-  * [Type-along Coding](type-along.md)
-  * [Errors](errors.md)

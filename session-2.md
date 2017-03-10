@@ -11,6 +11,7 @@ Students begin writing code to add an enemy to the game. For this session, we wi
 - Understand basic linear algebra as its needed by games
 
 ## New Code
+By the end of the session, you will have written the following script:
 
 ```cs
 using UnityEngine;
@@ -24,15 +25,3 @@ public class AlwaysLookAt : MonoBehaviour {
   }
 }
 ```
-
-<!-- * what is `using ...`
-* what is `public class ...`
-* what is `MonoBehaviour`
-* what is `public GameObject target` + add comment?
-* what is `void Update()`
-* what is `transform`
-* what is `transform.up`
-* assignment
-* vector math
-
-![](vO3XwID5Cpg92XO55VuRg.png) -->

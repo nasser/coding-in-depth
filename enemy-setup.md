@@ -3,9 +3,9 @@
 
 Create an empty game object and name it "Enemy". Add a `SpriteRenderer`, `PolygonCollider2D`, and `Rigidbody2D` components with the following values
 
-![](5Ng3okjTuluWJkK8m2Q.png)
+![](uojywfVM8nEGRLTX7HilA.png)
 
-Mostly defaults, except `Rigidbody2D`'s Gravity Scale has been set to 0. The image used here is `enemyRed1` but feel free to use whatever you want as long as the graphic points up.
+Mostly defaults, except `Rigidbody2D`'s Gravity Scale has been set to 0 and the Collider's Is Trigger is set to true. The image used here is `enemyRed1` but feel free to use whatever you want as long as the graphic points up (i.e. the graphic is aligned with the green axis).
 
 ![](4ypUGr66DfUooyMJIYqwQ.png)
 

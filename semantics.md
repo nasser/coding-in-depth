@@ -35,7 +35,7 @@ That's a lot of components! This is how Unity wants you to build your games, tho
 
 Once you're thinking in terms of GameObjects and Components, you're ready to take on Unity!
 
-The way you organize your game, the number of Components and what goes in them is up to the developers. Every team finds a style that works for it, and it is not an exact science. For example, in the earlier Asteroids player ship example, the movement and rotation Component could be combined into one. This would not be "wrong" and breaking them apart is not necessarily "better". Stress this with your class!
+The way you organize your game, the number of Components and what goes in them is up to the developers. Every team finds a style that works for it, and it is not an exact science. For example, in the earlier Asteroids player ship example, the movement and rotation Component could be combined into one. This would not be "wrong" and breaking them apart is not necessarily "better". Stress with your class that there is always more than one way to solve a problem, and part of the challenge of computer programming is finding an approach that works for everyone involved.
 
 #### Exercise {#exercise-break-down}
 Ask the class to try and break down popular "things" in video games into Unity-style Components. Ask the students what games they play and what "things" they contain that can be broken down, and suggest your own. Guide them towards thinking of common, reusable Components between "things".
@@ -47,5 +47,5 @@ If Mario was made in Unity, there would be no “mario” object, just a normal 
 * Unity organizes games into GameObjects and Components
 * GameObjects organize all the "things" in your game and contain Components
 * Components implement behavior and logic, and only exist attached to GameObjects
-* Components are either built in to Unity or are programmed by you
+* Components are either built into Unity or are programmed by you
 * The only way to write code in Unity is to make new components and attach them to GameObjects

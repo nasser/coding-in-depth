@@ -8,9 +8,12 @@ This is further complicated by the fact that Unity actually has *two* physics en
 ### Rigidbodies and Colliders
 Attaching the built in `Rigidbody2D` component to a GameObject causes it to participate in the physics simulation. By default, it will apply gravity, and setting Gravity Scale to 0 disables that. A GameObject without a `Rigidbody2D` is effectively ignored by the physics engine.
 
-The `Rigidbody2D` component does not specify the *shape* of an object, though. That is left up to the `Collider2D` components. There are a bunch of them in different shapes, and you can add as many as you want to a GameObject. We use `PolygonCollider2D` in this lesson as it gives the tightest collision detection. Colliders can be [triggers](https://unity3d.com/learn/tutorials/topics/physics/colliders-triggers), which means they do not react physically, and generate different messages. We are not using trigegrs in this lesson.
+The `Rigidbody2D` component does not specify the *shape* of an object, though. That is left up to the `Collider2D` components. There are a bunch of them in different shapes, and you can add as many as you want to a GameObject. We use `PolygonCollider2D` in this lesson as it gives the tightest collision detection.
 
 Strictly speaking, for the collision of two objects to be detected, *both* need colliders and *at least one* needs a rigidbody. To keep things simple and consistent, we just insist that every object be given a rigidbody and a collider if we want collision detection.
+
+### Triggers
+There are two kinds of Colliders in Unity: Triggers and non-Triggers. When a Collider is a trigger Unity's physics engine only works to inform your code that two objects are touching, and nothing more. When a Collider is not a trigger (the default), Unity will both inform your code when two objects touch *and* animate the objects to bounce around in a physically realistic way. For this lesson, all of our Colliders are triggers because realistic physics would mess up the simple 2D game we are making.
 
 ### Detecting Collision
 Since we set up the enemy in the last session to have a `Rigidbody2D` and a `PolygonCollider2D`, and the Player's bullets already have a `Rigidbody2D` and `BoxCollider2D` attached, we're ready to start writing code! Create a new component on the Enemy named `DestroySelfOnCollision` that will remove the attached gameObject whenever collision is detected. Guide your class through writing the following code (not the final code yet, but close):
@@ -22,7 +25,7 @@ using UnityEngine;
 
 public class DestroySelfOnCollision : MonoBehaviour
 {
-	void OnCollisionEnter2D(Collision2D collision)
+	void OnTriggerEnter2D(Collider2D otherCollider)
 	{
       Destroy(gameObject);
 	}
@@ -33,10 +36,10 @@ public class DestroySelfOnCollision : MonoBehaviour
 #### Explanation
 Most of this code is like the `AlwaysLookAt` component from the previous session, except with `OnCollisionEnter2D` in place of `Update`. Stress the similarities with your class.
 
-##### `OnCollisionEnter2D`
-Recall that Unity uses specially named C# methods to send "messages" to your components. `Start` gets called once at the start of a game, `Update` gets called once every frame, and here `OnCollisionEnter2D` gets called the first frame of a collision detected. This answers our first question: How do we know when two GameObjects touch? The `OnCollisionEnter2D` method is called on *every component* attached to *every GameObject* involved in the collision. The order they they get called in is generally random, but you can [control it](https://docs.unity3d.com/Manual/class-ScriptExecution.html) to some extent.
+##### `OnTriggerEnter2D`
+Recall that Unity uses specially named C# methods to send "messages" to your components. `Start` gets called once at the start of a game, `Update` gets called once every frame, and here `OnTriggerEnter2D` gets called the first frame a trigger collision is detected. This answers our first question: How do we know when two GameObjects touch? The `OnTriggerEnter2D` method is called on *every component* attached to *every GameObject* involved in the collision. The order they they get called in is generally random, but you can [control it](https://docs.unity3d.com/Manual/class-ScriptExecution.html) to some extent.
 
-Unlike `Start` and `Update`, `OnCollisionEnter2D` passes additional information to you when it is triggered in the form of the [parameter `collision`](https://docs.unity3d.com/ScriptReference/Collision2D.html). This *describes* the collision, and has properties like [`contacts`](https://docs.unity3d.com/ScriptReference/Collision2D-contacts.html) (the specific points where the collision occurred) and [`relativeVelocity`](https://docs.unity3d.com/ScriptReference/Collision2D-relativeVelocity.html), the relative velocity of the colliding objects.
+Unlike `Start` and `Update`, `OnTriggerEnter2D` passes additional information to you when it is triggered in the form of the [parameter `otherCollider`](https://docs.unity3d.com/ScriptReference/Collider2D.html). It is a reference to the *other collider* that this collider just hit. It is not a GameObject, but we can ask it for the GameObject it is attached to by [`otherCollider.gameObject`](https://docs.unity3d.com/ScriptReference/Component-gameObject.html).
 
 ##### `Destroy`
 [`Destroy`](https://docs.unity3d.com/ScriptReference/Object.Destroy.html) removes the specified GameObject, in this case [`gameObject`](https://docs.unity3d.com/ScriptReference/Component-gameObject.html) is the GameObject attached to the component in question.

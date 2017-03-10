@@ -1,7 +1,7 @@
 # Session 2
 ## Turning Logic
 
-Now that the `target` field has a value, making the enemy turn to face is a single line of code, but that line is quite dense. Add
+Now that the `target` field has a value, making the enemy turn to face it is a single line of code, but that line is quite dense. Add
 
 ```cs
 transform.up = target.transform.position - transform.position;
@@ -48,7 +48,7 @@ For the purposes of this script, however, the easiest thing to do is to *set the
 It is a vector, so it is an indication of direction. Assigning it a new value will rotate the object so that the green arrow is facing this new direction. Since our green arrow lines up with the front of the enemy, this causes the enemy to turn and "face" in that new direction!
 
 ##### Syntax
-The `.` operator is the *member access* operator. You can read `transform.up` as "get me the thing called `up` from inside the `transform` object". Here, `transform` is shorthand for `this.transform`, which in turn is shorthand for `this.gameObject.transform`. [`this`](https://msdn.microsoft.com/en-us/library/dk1507sz.aspx) is a special keyword in C# that refers to the *current* object that your code is running on, in this case the `AlwaysLookAt` component. The [`gameObject`](https://docs.unity3d.com/ScriptReference/Component-gameObject.html) field refers to the GameObject the component is attached to, and the `transform` field refers to the Transform component attached to that GameObject. So, `transform.up` can be read as "get me the `up` property of the Transform component attached to the same GameObject as me" from the perspective of the `AlwaysLookAt` component.
+The `.` operator is the *member access* operator. You can read `transform.up` as "get the thing called `up` from inside the `transform` object". Here, `transform` is shorthand for `this.transform`, which in turn is shorthand for `this.gameObject.transform`. [`this`](https://msdn.microsoft.com/en-us/library/dk1507sz.aspx) is a special keyword in C# that refers to the *current* object that your code is running on, in this case the `AlwaysLookAt` component. The [`gameObject`](https://docs.unity3d.com/ScriptReference/Component-gameObject.html) field refers to the GameObject the component is attached to, and the `transform` field refers to the Transform component attached to that GameObject. So, `transform.up` can be read as "get the `up` property of the Transform component attached to the same GameObject as me" from the perspective of the `AlwaysLookAt` component.
 
 Assigning a new value is done with the `=` operator, which assigns the result of the expression on the right of the `=` symbol to whatever is on the left of the `=` symbol. `transform.up = target.transform.position - transform.position;` can be read as "Assign to the up property of the Transform component attached to the same GameObject as me the result of `target.transform.position - transform.position`".
 

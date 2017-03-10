@@ -10,6 +10,7 @@ Students make the Enemy respond to collision with the player's bullets by disapp
 * Make multiple components work together
 
 ## New Code
+By the end of the session, you will have written the following script:
 
 ```cs
 using System.Collections;
@@ -20,18 +21,12 @@ public class DestroySelfOnCollision : MonoBehaviour
 {
 	public string otherTag;
 
-	void OnCollisionEnter2D(Collision2D collision)
+	void OnTriggerEnter2D(Collider2D otherCollider)
 	{
-		if (collision.gameObject.tag == otherTag)
+		if (otherCollider.gameObject.tag == otherTag)
 		{
 			Destroy(gameObject);
 		}
 	}
 }
 ```
-
-<!--
-* similarities
- [`OnCollisionEnter2D`](https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnCollisionEnter2D.html)
-* [`Destroy`](https://docs.unity3d.com/ScriptReference/Object.Destroy.html)
-* [Tags](https://docs.unity3d.com/Manual/Tags.html) -->
