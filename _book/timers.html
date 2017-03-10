@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Play and Hack · GitBook</title>
+        <title>Timers · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -59,10 +59,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="session-2.html" />
+    <link rel="next" href="prefabs.html" />
     
     
-    <link rel="prev" href="ui.html" />
+    <link rel="prev" href="instantiating.html" />
     
 
     </head>
@@ -171,7 +171,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2.2.3" data-path="play-and-hack.html">
+        <li class="chapter " data-level="1.2.2.3" data-path="play-and-hack.html">
             
                 <a href="play-and-hack.html">
             
@@ -371,7 +371,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.5.3" data-path="timers.html">
+        <li class="chapter active" data-level="1.2.5.3" data-path="timers.html">
             
                 <a href="timers.html">
             
@@ -490,7 +490,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Play and Hack</a>
+        <a href="." >Timers</a>
     </h1>
 </div>
 
@@ -505,35 +505,62 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="session-1">Session 1</h1>
-<h2 id="play-and-hack">Play and Hack</h2>
-<h3 id="play">Play</h3>
-<p>Have students play the game for some time. Afterwards, ask them what they thought. Possible questions include:</p>
-<ul>
-<li>Was it fun?</li>
-<li>If so, how?</li>
-<li>If not, why?</li>
-<li>What would they change?</li>
-</ul>
-<p>This does not need to be an in-depth game-literacy focused discussion, but deep enough to give the students concrete goals when they hack the game.</p>
-<h3 id="hack-the-game">Hack the game</h3>
-<p>Have youd students tweak values, add and remove components so that the game plays differently without writing code. The challenge is to make a game that is as different as possible before any code is introduced. This stresses the importance and power of the GameObject/Compoent design of Unity. Ideally, this excersise will lead students to get excited by modifying the game, but frustrated at the limitations of value tweaking. This frustration speaks to the importance of writing code, whithout which you are beholden to modifying the work of others.</p>
-<p>The components that make up the game are designed for this. Their names are descriptive and every field is commented with the role it plays. Familiarize yourself with the components before class so you can effectively guide the students in hacking the game.</p>
-<p>A focused <em>prompt</em> or challenge is a good way to guide students in an otherwise open ended excersise. In addition to their ideas of what they would change about the game from earlier, possible prompts include:</p>
-<ul>
-<li>How can we make the game really hard?</li>
-<li>How can we make the game really easy?</li>
-<li>How can we make the game &quot;better&quot; ?</li>
-</ul>
-<p>Work through the first prompt together. State the goal clearly, and tweak the values of the game to achieve it. Make sure to demonstrate</p>
-<ul>
-<li>Changing values on a component</li>
-<li>Adding a component</li>
-<li>Removing a component</li>
-</ul>
-<p>at least once each. Follow the guidance of <a href="type-along.html">type-along coding</a> (even though no code is being written yet).</p>
-<p>Once everyone has that mod working, present them with another prompt, and let them tackle that on their own. Depending on available time, present them with more prompts or let them hack the game as they wish until the end of the session.</p>
-<p>TODO Overview of Components + Potential Hacks</p>
+                                <h1 id="session-4">Session 4</h1>
+<h2 id="timers">Timers</h2>
+<p>The first task is to make the bullets fire more slowly, or more specifically, to have control over the rate at which they spawn. The challenge is to bridge the fact that Unity&apos;s <code>Update</code> message is sent <em>once</em> every frame, but we want to clone a bullet <em>once every certain number of seconds</em>. That is, we have to bridge the notion of <em>frames</em> with the notion of <em>seconds</em>. This has always been a confusing subject for students! So make sure to allow for ample tome to cover it.</p>
+<h3 id="frames">Frames</h3>
+<p>Unity creates the illusion of motion on a screen by generating many images and displaying them after each other. This is a lot like the way a movie works, except that Unity can react to a player&apos;s input and generate totally new content every time. One of these images that gets generated is called a <em>frame</em>.</p>
+<p>The conceptual leap is that frames happen <em>very</em> fast, around sixty per second, but we tend to think of time in terms of seconds. There is no easy way to write code that runs once a second (Unity&apos;s <a href="https://docs.unity3d.com/Manual/Coroutines.html" target="_blank">coroutines</a> can actually do this, but they&apos;re a bit advanced for a first workshop), so your code tends to be invoked once a frame. To complicate thing further, frames don&apos;t all take the same amount of time. More action and computation might cause one frame to take longer than another one.</p>
+<p>A diagram approximating this reality is often helpful.</p>
+<p><img src="wfDMdv9A7oB0fCfS5420w.png" alt=""></p>
+<p>Demonstrate that many frames happen in one second, that they don&apos;t line up with seconds at all, and that they take a different amount of time. Note that this diagram illustrates around seven frames per second to save space, when Unity will actually run closer to sixty frames pre second.</p>
+<p>This explains why so many bullets were being spawned in the earlier exercise. Our <code>Update</code> code was being called once a frame, so by the time a second had passed we had <code>Instantiate</code>d around sixty bullets!</p>
+<h3 id="delta-time">Delta Time</h3>
+<p>To convert between frames and seconds, Unity provides us with <a href="https://docs.unity3d.com/ScriptReference/Time-deltaTime.html" target="_blank"><code>Time.deltaTime</code></a>, the number of seconds it took to complete the last frame, and it usually a very small number. One way to think of <code>Time.deltaTime</code> is as a measure of how many seconds make up a single frame. Frames per second is a common measure of how fast a game is running, and <code>Time.deltaTime</code> is its inverse.</p>
+<p>The official Unity tutorial does a decent job of covering the concept.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/a-w7w8x_moE" frameborder="0" allowfullscreen></iframe>
+
+<h3 id="slower-bullets">Slower Bullets</h3>
+<p>We&apos;re going to clone our bullet only after a certain number of seconds has passed. There are a few ways to do this in Unity, but the approach taken here is the following:</p>
+<ol>
+<li>Specify how many seconds to wait between between clones. (e.g 5 seconds)</li>
+<li>Maintain a counter variable that initially has the same value as the number of seconds to wait between clones (e.g. 5 seconds)</li>
+<li>Every frame, subtract <code>Time.deltaTime</code> from the counter</li>
+<li>If the counter is less than zero, reset the counter and clone the bullet as before</li>
+</ol>
+<p>Guide your students to write the following script:</p>
+<pre><code class="lang-cs"><span class="hljs-keyword">using</span> System.Collections;
+<span class="hljs-keyword">using</span> System.Collections.Generic;
+<span class="hljs-keyword">using</span> UnityEngine;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CloneOnTimer</span> : <span class="hljs-title">MonoBehaviour</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span> timeBetweenClones = <span class="hljs-number">5</span>;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">float</span> counter;
+    <span class="hljs-keyword">public</span> GameObject clone;
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)
+    </span>{
+        counter = timeBetweenClones;
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Update</span>(<span class="hljs-params"></span>)
+    </span>{
+        counter = counter - Time.deltaTime;
+        <span class="hljs-keyword">if</span> (counter &lt;= <span class="hljs-number">0</span>)
+        {
+            counter = timeBetweenClones;
+            Instantiate(clone, transform.position, transform.rotation);
+        }
+    }
+}
+</code></pre>
+<h3 id="explanation">Explanation</h3>
+<p>Use the fact that all variables are public to watch their values change while the game is playing. Watching <code>counter</code> decrease slowly can be particularly helpful.</p>
+<h4 id="timebetweenclones--5"><code>timeBetweenClones = 5;</code></h4>
+<p>The fields are largely the same, except that <code>timeBetweenClones</code> has a <code>= 5</code> after it. This means that the <em>default value</em> for new <code>CloneOnTimer</code> components will be 5. Unity will always use the value in the inspector, however, so changing the value there will override this.</p>
+<h4 id="void-start-"><code>void Start ()</code></h4>
+<p>In addition to <code>Update</code>, we need to run some logic to set things up. <code>Start</code> runs only once at the start of a game, and in here sets <code>counter</code> to have the same value as <code>timeBetweenClones</code></p>
 
                                 
                                 </section>
@@ -561,12 +588,12 @@
 
             
                 
-                <a href="ui.html" class="navigation navigation-prev " aria-label="Previous page: Unity's UI">
+                <a href="instantiating.html" class="navigation navigation-prev " aria-label="Previous page: Instantiating">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="session-2.html" class="navigation navigation-next " aria-label="Next page: Session 2">
+                <a href="prefabs.html" class="navigation navigation-next " aria-label="Next page: Prefabs">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -577,7 +604,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Play and Hack","level":"1.2.2.3","depth":3,"next":{"title":"Session 2","level":"1.2.3","depth":2,"path":"session-2.md","ref":"session-2.md","articles":[{"title":"Setup","level":"1.2.3.1","depth":3,"path":"enemy-setup.md","ref":"enemy-setup.md","articles":[]},{"title":"C# vs Unity","level":"1.2.3.2","depth":3,"path":"csharp-vs-unity.md","ref":"csharp-vs-unity.md","articles":[]},{"title":"Boilerplate","level":"1.2.3.3","depth":3,"path":"boilerplate.md","ref":"boilerplate.md","articles":[]},{"title":"Fields","level":"1.2.3.4","depth":3,"path":"fields.md","ref":"fields.md","articles":[]},{"title":"Turning Logic","level":"1.2.3.5","depth":3,"path":"turning-logic.md","ref":"turning-logic.md","articles":[]}]},"previous":{"title":"Unity's UI","level":"1.2.2.2","depth":3,"path":"ui.md","ref":"ui.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"play-and-hack.md","mtime":"2017-03-06T22:02:04.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-10T06:23:50.562Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Timers","level":"1.2.5.3","depth":3,"next":{"title":"Prefabs","level":"1.2.5.4","depth":3,"path":"prefabs.md","ref":"prefabs.md","articles":[]},"previous":{"title":"Instantiating","level":"1.2.5.2","depth":3,"path":"instantiating.md","ref":"instantiating.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"timers.md","mtime":"2017-03-10T06:34:19.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-10T06:23:50.562Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

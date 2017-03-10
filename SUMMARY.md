@@ -17,11 +17,10 @@
     * [Collision Detection](collision.md)
     * [Tags](tags.md)
   * [Session 4](session-4.md)
-    * Setup
-    * Prefabs
-    * Instantiating
-    * Offsets
-    * Timers
+    * [Setup](shoot-back-setup.md)
+    * [Instantiating](instantiating.md)
+    * [Timers](timers.md)
+    * [Prefabs](prefabs.md)
 
 ## Context
 * [History](history.md)

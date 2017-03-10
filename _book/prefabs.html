@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Play and Hack · GitBook</title>
+        <title>Prefabs · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -59,10 +59,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="session-2.html" />
+    <link rel="next" href="history.html" />
     
     
-    <link rel="prev" href="ui.html" />
+    <link rel="prev" href="timers.html" />
     
 
     </head>
@@ -171,7 +171,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2.2.3" data-path="play-and-hack.html">
+        <li class="chapter " data-level="1.2.2.3" data-path="play-and-hack.html">
             
                 <a href="play-and-hack.html">
             
@@ -384,7 +384,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.5.4" data-path="prefabs.html">
+        <li class="chapter active" data-level="1.2.5.4" data-path="prefabs.html">
             
                 <a href="prefabs.html">
             
@@ -490,7 +490,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >Play and Hack</a>
+        <a href="." >Prefabs</a>
     </h1>
 </div>
 
@@ -505,35 +505,26 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="session-1">Session 1</h1>
-<h2 id="play-and-hack">Play and Hack</h2>
-<h3 id="play">Play</h3>
-<p>Have students play the game for some time. Afterwards, ask them what they thought. Possible questions include:</p>
+                                <h1 id="session-4">Session 4</h1>
+<h2 id="prefabs">Prefabs</h2>
+<p>We&apos;re almost there! The last thing that&apos;s missing is the fact that the enemy is shooting the player&apos;s bullets. To fix this, we need to make a new <em>prefab</em> for the enemy&apos;s bullet and drag that into the <code>CloneOnTimer</code> Clone variable.</p>
+<p>A <a href="https://docs.unity3d.com/Manual/Prefabs.html" target="_blank">Prefab</a> is a collection of GameObjects, Components, and field values. They are useful for objects that need to be reused. The game already has prefabs for the player&apos;s bullet (called &quot;Bullet&quot;), the losing and winning text, and the three small asteroids that spawn when a larger asteroid is destroyed.</p>
+<h3 id="enemy-bullets">Enemy Bullets</h3>
+<p>The enemy bullet is almost identical to the player&apos;s bullet, except:</p>
+<ol>
+<li>It should look different</li>
+<li>It should remove the player</li>
+<li>It should move slower than the player&apos;s bullet</li>
+</ol>
+<p>Make a copy of the Bullet prefab, rename it &quot;Enemy Bullet&quot;, and give it the following component field values:</p>
+<p><img src="U42WlGyvnhHb8Ut9g7Uw.png" alt=""></p>
+<p>These values are identical to the Bullet prefab except in the <code>SpriteRenderer</code>&apos;s Sprite value, the <code>ForwardMover</code>&apos;s speed value, and the <code>Destroy</code> scripts.</p>
+<p>Drag the Enemy Bullet prefab on to the Clone variable of <code>CloneOnTimer</code> and the game is finished!</p>
+<h4 id="exercise">Exercise</h4>
 <ul>
-<li>Was it fun?</li>
-<li>If so, how?</li>
-<li>If not, why?</li>
-<li>What would they change?</li>
+<li>Experiment with different values for the Enemy Bullet&apos;s speed. What impact does it have on the game?</li>
+<li>Remove the <code>DestroySelfOnCollision</code> script that destroys Asteroids. What impact does this have on the game?</li>
 </ul>
-<p>This does not need to be an in-depth game-literacy focused discussion, but deep enough to give the students concrete goals when they hack the game.</p>
-<h3 id="hack-the-game">Hack the game</h3>
-<p>Have youd students tweak values, add and remove components so that the game plays differently without writing code. The challenge is to make a game that is as different as possible before any code is introduced. This stresses the importance and power of the GameObject/Compoent design of Unity. Ideally, this excersise will lead students to get excited by modifying the game, but frustrated at the limitations of value tweaking. This frustration speaks to the importance of writing code, whithout which you are beholden to modifying the work of others.</p>
-<p>The components that make up the game are designed for this. Their names are descriptive and every field is commented with the role it plays. Familiarize yourself with the components before class so you can effectively guide the students in hacking the game.</p>
-<p>A focused <em>prompt</em> or challenge is a good way to guide students in an otherwise open ended excersise. In addition to their ideas of what they would change about the game from earlier, possible prompts include:</p>
-<ul>
-<li>How can we make the game really hard?</li>
-<li>How can we make the game really easy?</li>
-<li>How can we make the game &quot;better&quot; ?</li>
-</ul>
-<p>Work through the first prompt together. State the goal clearly, and tweak the values of the game to achieve it. Make sure to demonstrate</p>
-<ul>
-<li>Changing values on a component</li>
-<li>Adding a component</li>
-<li>Removing a component</li>
-</ul>
-<p>at least once each. Follow the guidance of <a href="type-along.html">type-along coding</a> (even though no code is being written yet).</p>
-<p>Once everyone has that mod working, present them with another prompt, and let them tackle that on their own. Depending on available time, present them with more prompts or let them hack the game as they wish until the end of the session.</p>
-<p>TODO Overview of Components + Potential Hacks</p>
 
                                 
                                 </section>
@@ -561,12 +552,12 @@
 
             
                 
-                <a href="ui.html" class="navigation navigation-prev " aria-label="Previous page: Unity's UI">
+                <a href="timers.html" class="navigation navigation-prev " aria-label="Previous page: Timers">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="session-2.html" class="navigation navigation-next " aria-label="Next page: Session 2">
+                <a href="history.html" class="navigation navigation-next " aria-label="Next page: History">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -577,7 +568,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Play and Hack","level":"1.2.2.3","depth":3,"next":{"title":"Session 2","level":"1.2.3","depth":2,"path":"session-2.md","ref":"session-2.md","articles":[{"title":"Setup","level":"1.2.3.1","depth":3,"path":"enemy-setup.md","ref":"enemy-setup.md","articles":[]},{"title":"C# vs Unity","level":"1.2.3.2","depth":3,"path":"csharp-vs-unity.md","ref":"csharp-vs-unity.md","articles":[]},{"title":"Boilerplate","level":"1.2.3.3","depth":3,"path":"boilerplate.md","ref":"boilerplate.md","articles":[]},{"title":"Fields","level":"1.2.3.4","depth":3,"path":"fields.md","ref":"fields.md","articles":[]},{"title":"Turning Logic","level":"1.2.3.5","depth":3,"path":"turning-logic.md","ref":"turning-logic.md","articles":[]}]},"previous":{"title":"Unity's UI","level":"1.2.2.2","depth":3,"path":"ui.md","ref":"ui.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"play-and-hack.md","mtime":"2017-03-06T22:02:04.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-10T06:23:50.562Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Prefabs","level":"1.2.5.4","depth":3,"next":{"title":"History","level":"2.1","depth":1,"path":"history.md","ref":"history.md","articles":[]},"previous":{"title":"Timers","level":"1.2.5.3","depth":3,"path":"timers.md","ref":"timers.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"prefabs.md","mtime":"2017-03-10T07:42:49.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-10T06:23:50.562Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
