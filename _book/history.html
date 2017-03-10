@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>How Unity Works · GitBook</title>
+        <title>History · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.2">
@@ -59,10 +59,10 @@
     <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="ui.html" />
+    <link rel="next" href="lesson-plan.html" />
     
     
-    <link rel="prev" href="session-1.html" />
+    <link rel="prev" href="errors.html" />
     
 
     </head>
@@ -144,7 +144,7 @@
         
         
     
-        <li class="chapter " data-level="3.1" data-path="history.html">
+        <li class="chapter active" data-level="3.1" data-path="history.html">
             
                 <a href="history.html">
             
@@ -205,7 +205,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="4.1.2.1" data-path="semantics.html">
+        <li class="chapter " data-level="4.1.2.1" data-path="semantics.html">
             
                 <a href="semantics.html">
             
@@ -497,7 +497,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="." >How Unity Works</a>
+        <a href="." >History</a>
     </h1>
 </div>
 
@@ -512,42 +512,35 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="session-1">Session 1</h1>
-<h2 id="how-unity-works">How Unity Works</h2>
-<p>Unity is designed around a particular set of ideas meant to make your work as a game developer easier. Understanding these ideas is crucial to using Unity effectively, and working contrary to them will cause a lot of undue headache.</p>
-<h3 id="games-in-general">Games In General</h3>
-<p>The core idea behind Unity is that most games are full of &quot;things&quot; that interact with each other and react to player actions in different ways over time. For example, some of the &quot;things&quot; in Asteroids are the player&apos;s ship, the asteroids, and the player&apos;s bullets. The way they interact with eachother is different for each &quot;thing&quot; and might depend on events are happening in the game. For example, when a bullet touches an asteroid, the asteroid disappears, and is replaced with three smaller asteroids. When the player presses the right arrow key, the ship turns right. Most games can be described by different &quot;things&quot; and how they interact.</p>
-<p><img src="http://static1.gamespot.com/uploads/original/1539/15391776/2583507-5676190985-aster.png" alt=""></p>
-<h4 id="exercise-identify-things">Exercise </h4>
-<p>Have the class identify &quot;things&quot; and interactions in other games, and suggest your own.</p>
-<h3 id="unity-in-particular">Unity In Particular</h3>
-<p>Unity calls these &quot;things&quot; <a href="https://docs.unity3d.com/Manual/GameObjects.html" target="_blank">GameObjects</a>. <em>Everything</em> in your game is a GameObject. Players, enemies, pickups, parts of levels. Even things that are not immediately visible are GameObjects, like the area that marks the finish line in a racing game or the starting point in a platformer.</p>
-<p>GameObjects on their own do not do anything, and they are all equal. There is not, for example, a camera GameObject and a spaceship GameObject, just GameObjects. They are blank, empty containers waiting to be filled with the logic and behavior that comes from <a href="https://docs.unity3d.com/Manual/Components.html" target="_blank">Components</a>. A Component is a chunk of code designed to do one specific thing when attached to a GameObject. Some common Components are built in to Unity. These include the <a href="https://docs.unity3d.com/Manual/class-Camera.html" target="_blank">Camera</a> Component that draws the scene on the screen, the <a href="https://docs.unity3d.com/Manual/class-Rigidbody.html" target="_blank">Rigidbody</a> Component that makes GameObjects move with realistic physics, or the <a href="https://docs.unity3d.com/Manual/class-AudioSource.html" target="_blank">AudioSource</a> Component that plays sound files. You will not have to recreate these for every game. But more game-specific logic, like the way the player moves, or how pickups work, will need to be specified by the game developer by writing code.</p>
-<p>So, GameObjects <em>contain</em> Components, and Components must be <em>attached</em> to GameObjects. Unity&#x2019;s core idea is: everything in your game is a GameObject, and you tell GameObjects how to act and how to look by attaching Components to them.</p>
-<p><img src="https://d2mxuefqeaa7sj.cloudfront.net/s_02986F66D20964F9BB6F25081A8646F27F4CE29D977FD708E3973173FB7632C8_1487449484328_file.png" alt=""></p>
-<p>As an example, the player&apos;s ship in Asteroids could be a GameObject with:</p>
-<ul>
-<li>A component specifying what image to use to draw the ship</li>
-<li>A component specifying its position and rotation</li>
-<li>A component that creates a bullet GameObject when the player presses a button</li>
-<li>A component that rotates the ship when the player presses left or right</li>
-<li>A component that moves the ship forward the player presses forward or backwards</li>
-<li>A component that removes the ship when it touches an Asteroid</li>
-</ul>
-<p>That&apos;s a lot of components! This is how Unity wants you to build your games, though. The idea is that if you write small, generic components that aren&apos;t tied to one particular GameObject, you can re-use them on other GameObjects.</p>
-<p>Once you&apos;re thinking in terms of GameObjects and Components, you&apos;re ready to take on Unity!</p>
-<p>The way you organize your game, the number of Components and what goes in them is up to the developers. Every team finds a style that works for it, and it is not an exact science. For example, in the earlier Asteroids player ship example, the movement and rotation Component could be combined into one. This would not be &quot;wrong&quot; and breaking them apart is not necessarily &quot;better&quot;. Stress with your class that there is always more than one way to solve a problem, and part of the challenge of computer programming is finding an approach that works for everyone involved.</p>
-<h4 id="exercise-break-down">Exercise </h4>
-<p>Ask the class to try and break down popular &quot;things&quot; in video games into Unity-style Components. Ask the students what games they play and what &quot;things&quot; they contain that can be broken down, and suggest your own. Guide them towards thinking of common, reusable Components between &quot;things&quot;.</p>
-<p>If Mario was made in Unity, there would be no &#x201C;mario&#x201D; object, just a normal GameObject named Mario with a Component that says what he looks like, a Component that says how he should move, a Component that says how he can get hurt, and so on.</p>
-<h3 id="take-aways">Take Aways</h3>
-<ul>
-<li>Unity organizes games into GameObjects and Components</li>
-<li>GameObjects organize all the &quot;things&quot; in your game and contain Components</li>
-<li>Components implement behavior and logic, and only exist attached to GameObjects</li>
-<li>Components are either built into Unity or are programmed by you</li>
-<li>The only way to write code in Unity is to make new components and attach them to GameObjects</li>
-</ul>
+                                <h1 id="history">History</h1>
+<p>Unity&apos;s semantics are not arbitrary, but a fairly well reasoned approach to video game programming that makes sense given their historical context. This is non-critical information, but might help answer questions that come up.</p>
+<p>In many respects, video game development is a lot like other kinds of programming. It is unique in one important way, however: <strong>the goal is an aesthetic, human experience</strong>. This means &#x201C;success&#x201D; is highly subjective, and as a result <strong>iteration and playtesting are indispensable</strong>. The effect that has on the kind of programming you end up doing in games is that the flexibility of your code is important to ensure that you remain able to adapt to new creative ideas. This is radically different from, say, programming a server, where there will be a specification and a narrow definition of what is <em>correct</em>. Here, iteration is less important, and the kind of code you write changes accordingly.</p>
+<pre><code>_start:
+        # write(1, message, 13)
+        mov     $1, %rax
+        mov     $1, %rdi
+        mov     $message, %rsi
+        mov     $13, %rdx
+        syscall
+        mov     $60, %rax
+        xor     %rdi, %rdi
+        syscall
+message:
+        .ascii  &quot;Hello, world\n&quot;
+</code></pre><blockquote>
+<p><em>From <a href="http://cs.lmu.edu/~ray/notes/x86assembly/" target="_blank">http://cs.lmu.edu/~ray/notes/x86assembly/</a></em></p>
+</blockquote>
+<p>The original programming paradigm of the 1950s was imperative, where programs were nothing more than a sequence of machine level commands. There were no named variables, limited support for named blocks of code, mostly memory addresses that could be read and written to, no loops or conditionals, just &#x201C;branch statements&#x201D; to jump to different instructions, and no named functions, just blocks of code. Assembly languages for different computers fall into this category, and this kind of programming is still done on some low level systems.</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+int main(void)
+{
+    printf(&quot;hello, world\n&quot;);
+}
+</code></pre><blockquote>
+<p><em>From <a href="https://en.wikipedia.org/wiki/C_(programming_language)#.22Hello.2C_world.22_example" target="_blank">https://en.wikipedia.org/wiki/C_(programming_language)#.22Hello.2C_world.22_example</a></em></p>
+</blockquote>
+<p>Shortly following that was the structured programming of the late 1950s and 1960s. Most of the progress was being made in America, and these languages allowed programmers to assign English names to their variables and functions which made it easier for them to read and manage.</p>
 
                                 
                                 </section>
@@ -575,12 +568,12 @@
 
             
                 
-                <a href="session-1.html" class="navigation navigation-prev " aria-label="Previous page: Session 1">
+                <a href="errors.html" class="navigation navigation-prev " aria-label="Previous page: Errors">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="ui.html" class="navigation navigation-next " aria-label="Next page: Unity's UI">
+                <a href="lesson-plan.html" class="navigation navigation-next " aria-label="Next page: Lesson Plan">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -591,7 +584,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"How Unity Works","level":"4.1.2.1","depth":3,"next":{"title":"Unity's UI","level":"4.1.2.2","depth":3,"path":"ui.md","ref":"ui.md","articles":[]},"previous":{"title":"Session 1","level":"4.1.2","depth":2,"path":"session-1.md","ref":"session-1.md","articles":[{"title":"How Unity Works","level":"4.1.2.1","depth":3,"path":"semantics.md","ref":"semantics.md","articles":[]},{"title":"Unity's UI","level":"4.1.2.2","depth":3,"path":"ui.md","ref":"ui.md","articles":[]},{"title":"Play and Hack","level":"4.1.2.3","depth":3,"path":"play-and-hack.md","ref":"play-and-hack.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"semantics.md","mtime":"2017-03-10T22:34:25.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-10T22:40:24.304Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"History","level":"3.1","depth":1,"next":{"title":"Lesson Plan","level":"4.1","depth":1,"path":"lesson-plan.md","ref":"lesson-plan.md","articles":[{"title":"Setup","level":"4.1.1","depth":2,"path":"setup.md","ref":"setup.md","articles":[]},{"title":"Session 1","level":"4.1.2","depth":2,"path":"session-1.md","ref":"session-1.md","articles":[{"title":"How Unity Works","level":"4.1.2.1","depth":3,"path":"semantics.md","ref":"semantics.md","articles":[]},{"title":"Unity's UI","level":"4.1.2.2","depth":3,"path":"ui.md","ref":"ui.md","articles":[]},{"title":"Play and Hack","level":"4.1.2.3","depth":3,"path":"play-and-hack.md","ref":"play-and-hack.md","articles":[]}]},{"title":"Session 2","level":"4.1.3","depth":2,"path":"session-2.md","ref":"session-2.md","articles":[{"title":"C# vs Unity","level":"4.1.3.1","depth":3,"path":"csharp-vs-unity.md","ref":"csharp-vs-unity.md","articles":[]},{"title":"Setup","level":"4.1.3.2","depth":3,"path":"enemy-setup.md","ref":"enemy-setup.md","articles":[]},{"title":"Boilerplate","level":"4.1.3.3","depth":3,"path":"boilerplate.md","ref":"boilerplate.md","articles":[]},{"title":"Fields","level":"4.1.3.4","depth":3,"path":"fields.md","ref":"fields.md","articles":[]},{"title":"Turning Logic","level":"4.1.3.5","depth":3,"path":"turning-logic.md","ref":"turning-logic.md","articles":[]}]},{"title":"Session 3","level":"4.1.4","depth":2,"path":"session-3.md","ref":"session-3.md","articles":[{"title":"Setup","level":"4.1.4.1","depth":3,"path":"destroy-setup.md","ref":"destroy-setup.md","articles":[]},{"title":"Collision Detection","level":"4.1.4.2","depth":3,"path":"collision.md","ref":"collision.md","articles":[]},{"title":"Tags","level":"4.1.4.3","depth":3,"path":"tags.md","ref":"tags.md","articles":[]}]},{"title":"Session 4","level":"4.1.5","depth":2,"path":"session-4.md","ref":"session-4.md","articles":[{"title":"Setup","level":"4.1.5.1","depth":3,"path":"shoot-back-setup.md","ref":"shoot-back-setup.md","articles":[]},{"title":"Instantiating","level":"4.1.5.2","depth":3,"path":"instantiating.md","ref":"instantiating.md","articles":[]},{"title":"Timers","level":"4.1.5.3","depth":3,"path":"timers.md","ref":"timers.md","articles":[]},{"title":"Prefabs","level":"4.1.5.4","depth":3,"path":"prefabs.md","ref":"prefabs.md","articles":[]}]}]},"previous":{"title":"Errors","level":"2.2","depth":1,"path":"errors.md","ref":"errors.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"history.md","mtime":"2017-03-06T18:30:40.000Z","type":"markdown"},"gitbook":{"version":"3.2.2","time":"2017-03-10T22:40:24.304Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>

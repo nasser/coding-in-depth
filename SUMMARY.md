@@ -6,8 +6,8 @@
   * [Type-along Coding](type-along.md)
   * [Errors](errors.md)
 
-<!-- ## Context
-  * [History](history.md) -->
+## Context
+  * [History](history.md)
 
 * [Lesson Plan](lesson-plan.md)
   * [Setup](setup.md)
